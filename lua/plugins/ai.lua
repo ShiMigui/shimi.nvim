@@ -1,3 +1,5 @@
+local maps = require("core.keymap")
+
 ---@class HookOpts
 ---@field model? string
 ---@field prefix? string
@@ -60,16 +62,12 @@ return {
 	config = function(_, opts)
 		require("parrot").setup(opts)
 
-		local map = vim.keymap.set
-
-		map("n", "<leader>ac", "<cmd>PrtChatToggle<cr>", { desc = "AI Chat" })
-		map("n", "<leader>an", "<cmd>PrtChatNew<cr>", { desc = "New Chat" })
-		map("v", "<leader>ar", ":PrtRewrite Maintaining documentation. ", { desc = "Rewrite" })
-		map("v", "<leader>aa", ":PrtAppend ", { desc = "Append" })
-		map("v", "<leader>ap", ":PrtPrepend ", { desc = "Prepend" })
-		map("v", "<leader>ai", ":PrtImplement ", { desc = "Implement" })
-		map("v", "<leader>aq", ":PrtAsk ", { desc = "Ask AI" })
-		map("n", "<leader>at", "<cmd>PrtRetry<cr>", { desc = "Retry" })
-		map("n", "<leader>as", "<cmd>PrtStatus<cr>", { desc = "Parrot Status" })
+		maps["Rewrite"] = { leader = "ar", cmd = ":PrtRewrite " }
+		maps["New Chat"] = { leader = "an", cmd = "PrtChatNew" }
+		maps["Append"] = { leader = "aa", rhs = ":PrtAppend " }
+		maps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend " }
+		maps["Implement"] = { leader = "ai", cmd = "PrtImplement" }
+		maps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk " }
+		maps["Retry"] = { leader = "at", cmd = "PrtRetry" }
 	end,
 }
