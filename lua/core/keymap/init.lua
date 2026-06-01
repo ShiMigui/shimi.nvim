@@ -11,6 +11,8 @@
 ---@field esc? boolean
 
 local lsp = vim.lsp
+local api = vim.api
+local cmd = vim.cmd
 local buf = lsp.buf
 local inlay_hint = lsp.inlay_hint
 local diagnostic = vim.diagnostic
@@ -29,6 +31,18 @@ end
 return {
 	["exit insert mode"] = { lhs = "jk", modes = "i", esc = true },
 	["buffer quit"] = { leader = "bd", cmd = "bd!" },
+	["quit all others buffers"] = {
+		leader = "bD",
+		rhs = function()
+			local current = api.nvim_get_current_buf()
+			for _, b in ipairs(api.nvim_list_bufs()) do
+				if b ~= current and api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted then
+					cmd("bd " .. b)
+				end
+			end
+		end,
+	},
+	["format file"] = { leader = "gf", rhs = buf.format },
 
 	["go to definition"] = { lhs = "gd", rhs = buf.definition },
 	["go to declaration"] = { lhs = "gD", rhs = buf.declaration },

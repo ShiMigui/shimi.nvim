@@ -2,11 +2,7 @@ local maps = require("core.keymap")
 local config = require("config")
 
 return {
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } } },
-	},
+	"mfussenegger/nvim-jdtls",
 	{
 		"stevearc/conform.nvim",
 		opts = {
@@ -68,9 +64,10 @@ return {
 				capability_provider = "blink.cmp",
 				list = config.lsps,
 			},
+			ensure_installed = { "jdtls" },
 		},
 		config = function(_, opts)
-			local r = require("mason-registry") -- It's needed since Mason registry should not be cached yet
+			local r = require("mason-registry")
 			local function run()
 				require("catalog").setup(opts)
 			end

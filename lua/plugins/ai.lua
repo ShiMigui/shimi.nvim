@@ -62,12 +62,12 @@ return {
 	config = function(_, opts)
 		require("parrot").setup(opts)
 
-		maps["Rewrite"] = { leader = "ar", cmd = ":PrtRewrite " }
 		maps["New Chat"] = { leader = "an", cmd = "PrtChatNew" }
-		maps["Append"] = { leader = "aa", rhs = ":PrtAppend " }
-		maps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend " }
-		maps["Implement"] = { leader = "ai", cmd = "PrtImplement" }
-		maps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk " }
+		maps["Rewrite"] = { leader = "ar", rhs = ":PrtRewrite ", modes = "v" }
+		maps["Append"] = { leader = "aa", rhs = ":PrtAppend ", modes = { "n", "v" } }
+		maps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend ", modes = { "n", "v" } }
+		maps["Implement"] = { leader = "ai", rhs = ":PrtImplement ", modes = { "n", "v" } }
+		maps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk ", modes = { "n", "v" } }
 		maps["Retry"] = { leader = "at", cmd = "PrtRetry" }
 	end,
 }
