@@ -60,13 +60,10 @@ return {
 		dependencies = { { "williamboman/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
 		opts = {
 			conform = true,
-			lsp = {
-				capability_provider = "blink.cmp",
-				list = config.lsps,
-			},
-			ensure_installed = { "jdtls" },
+			lsp = config.lsps,
 		},
 		config = function(_, opts)
+			opts.capability_provider = "blink.cmp"
 			local r = require("mason-registry")
 			local function run()
 				require("catalog").setup(opts)

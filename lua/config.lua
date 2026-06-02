@@ -16,31 +16,33 @@ return {
 	},
 
 	lsps = {
-		lua = "lua-language-server",
-		{ "js", "ts", "jsx", "tsx", lsp = { "eslint-lsp", "typescript-language-server" } },
-		{ "html", "css", "scss", "js", "ts", "jsx", "tsx", lsp = "emmet-language-server" },
-		{ "scss", "css", lsp = "css-lsp" },
-		{ "php", "html", lsp = { "intelephense", "phpactor" } }, -- , "html-lsp"
-		css = "css-lsp",
-		md = "marksman",
-		yaml = {
-			["yaml-language-server"] = {
-				settings = {
-					yaml = {
-						schemas = {
-							["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
-								"docker-compose.yml",
-								"docker-compose.yaml",
-								"compose.yml",
-								"compose.yaml",
-							},
+		"lua-language-server",
+		"eslint-lsp",
+		"typescript-language-server",
+		"emmet-language-server",
+		"css-lsp",
+		"intelephense",
+		"phpactor",
+		"html-lsp",
+		"css-lsp",
+		"sqlls",
+		"dockerfile-language-server",
+		"marksman",
+		"jdtls",
+		["yaml-language-server"] = {
+			settings = {
+				yaml = {
+					schemas = {
+						["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
+							"docker-compose.yml",
+							"docker-compose.yaml",
+							"compose.yml",
+							"compose.yaml",
 						},
 					},
 				},
 			},
 		},
-		sql = "sqlls",
-		Dockerfile = "dockerfile-language-server",
 	},
 
 	ignore_files = { ".git/", "vendor/", "node_modules/" },
