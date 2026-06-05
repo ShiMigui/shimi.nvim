@@ -1,5 +1,3 @@
-local maps = require("core.keymap")
-
 ---@class HookOpts
 ---@field model? string
 ---@field prefix? string
@@ -11,9 +9,7 @@ local maps = require("core.keymap")
 --- @return fun(prt, params)
 local function hook(target, template, opts)
 	opts = opts or {}
-
 	template = template .. "FT: {{filetype}} Generate only the code"
-
 	return function(prt, params)
 		prt.Prompt(params, prt.ui.Target[target], prt.get_model(opts.model or "command"), opts.prefix, template)
 	end
@@ -29,14 +25,8 @@ return {
 				api_key = "ollama",
 				endpoint = "http://localhost:11434/api/chat",
 				params = {
-					chat = {
-						top_p = 0.95,
-						num_predict = 4096,
-					},
-					command = {
-						top_p = 0.95,
-						num_predict = 2048,
-					},
+					chat = { top_p = 0.95, num_predict = 4096 },
+					command = { top_p = 0.95, num_predict = 2048 },
 				},
 				topic = { model = "dev-ia" },
 				model = "dev-ia",
@@ -58,16 +48,16 @@ return {
 		enable_spinner = true,
 		spinner_type = "dots",
 	},
-
 	config = function(_, opts)
 		require("parrot").setup(opts)
+		local map = vim.keymap.set
 
-		maps["New Chat"] = { leader = "an", cmd = "PrtChatNew" }
-		maps["Rewrite"] = { leader = "ar", rhs = ":PrtRewrite ", modes = "v" }
-		maps["Append"] = { leader = "aa", rhs = ":PrtAppend ", modes = { "n", "v" } }
-		maps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend ", modes = { "n", "v" } }
-		maps["Implement"] = { leader = "ai", rhs = ":PrtImplement ", modes = { "n", "v" } }
-		maps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk ", modes = { "n", "v" } }
-		maps["Retry"] = { leader = "at", cmd = "PrtRetry" }
+		map("n", "<leader>an", "<cmd>PrtChatNew<cr>", { desc = "New Chat" })
+		map("v", "<leader>ar", ":PrtRewrite ", { desc = "Rewrite" })
+		map({ "n", "v" }, "<leader>aa", ":PrtAppend ", { desc = "Append" })
+		map({ "n", "v" }, "<leader>ap", ":PrtPrepend ", { desc = "Prepend" })
+		map({ "n", "v" }, "<leader>ai", ":PrtImplement ", { desc = "Implement" })
+		map({ "n", "v" }, "<leader>aq", ":PrtAsk ", { desc = "Ask AI" })
+		map("n", "<leader>at", "<cmd>PrtRetry<cr>", { desc = "Retry" })
 	end,
 }
