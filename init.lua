@@ -1,5 +1,4 @@
--- Define leader key
-vim.g.mapleader = "\\"
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Load core configuration
-require("core")
+require("config")
