@@ -1,7 +1,3 @@
----@class TSConfig
----@field install_dir string?
----@field parsers string[]
-
 ---@type LazySpec
 return {
 	"nvim-treesitter/nvim-treesitter",
@@ -13,54 +9,29 @@ return {
 	config = function()
 		local ts = require("nvim-treesitter")
 
-		---@type TSConfig
-		local config = {
-			install_dir = vim.fn.stdpath("data") .. "/site",
-			parsers = {
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"markdown",
-				"markdown_inline",
-				"bash",
-				"python",
-				"java",
-				"javascript",
-				"typescript",
-				"tsx",
-				"html",
-				"css",
-				"scss",
-				"json",
-				"yaml",
-				"php",
-				"sql",
-				"dockerfile",
-			},
-		}
+		ts.setup()
 
-		ts.setup({
-			install_dir = config.install_dir,
+		-- Install default parsers
+		ts.install({
+			"lua",
+			"vim",
+			"vimdoc",
+			"query",
+			"markdown",
+			"markdown_inline",
 		})
 
-		ts.install(config.parsers)
-
-		vim.api.nvim_create_autocmd("FileType", {
-			group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
+		local api = vim.api
+		api.nvim_create_autocmd("FileType", {
+			group = api.nvim_create_augroup("TreesitterSetup", { clear = true }),
 			callback = function(args)
 				local buf = args.buf
 
-				if not vim.api.nvim_buf_is_valid(buf) then
+				if not api.nvim_buf_is_valid(buf) or vim.bo[buf].buftype ~= "" then
 					return
 				end
 
-				if vim.bo[buf].buftype ~= "" then
-					return
-				end
-
-				local buf_name = vim.api.nvim_buf_get_name(buf)
-				if buf_name == "" then
+				if api.nvim_buf_get_name(buf) == "" then
 					return
 				end
 
@@ -69,10 +40,16 @@ return {
 					return
 				end
 
+				-- Auto-install missing parsers
+				if not ts.is_installed(lang) then
+					ts.install(lang)
+				end
+
 				pcall(vim.treesitter.start, buf, lang)
 
-				vim.wo[0][0].foldmethod = "expr"
-				vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				local wo = vim.wo[0][0]
+				wo.foldmethod = "expr"
+				wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 				vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 			end,
