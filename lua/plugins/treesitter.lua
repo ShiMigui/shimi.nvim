@@ -6,19 +6,20 @@ return {
 	},
 	build = ":TSUpdate",
 	config = function()
-		local configs = require("nvim-treesitter.configs")
+		local ts = require("nvim-treesitter")
 
-		configs.setup({
-			ensure_installed = {
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"markdown",
-				"markdown_inline",
-			},
-			highlight = { enable = true },
-			indent = { enable = true },
+		-- In the main branch, we use the core-style configuration
+		-- and the provided helper functions from the plugin.
+		ts.setup()
+
+		-- Install default parsers
+		ts.install({
+			"lua",
+			"vim",
+			"vimdoc",
+			"query",
+			"markdown",
+			"markdown_inline",
 		})
 
 		local api = vim.api
@@ -26,6 +27,7 @@ return {
 			group = api.nvim_create_augroup("TreesitterSetup", { clear = true }),
 			callback = function(args)
 				local buf = args.buf
+
 				if not api.nvim_buf_is_valid(buf) or vim.bo[buf].buftype ~= "" then
 					return
 				end
@@ -39,15 +41,16 @@ return {
 					return
 				end
 
-				local ts = require("nvim-treesitter.parsers")
-				if not ts.has_parser(lang) then
-					return
+				if not ts.is_installed(lang) then
+					ts.install(lang)
 				end
 
 				pcall(vim.treesitter.start, buf, lang)
 
+				-- Use buffer-local settings safely
 				vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local", win = 0 })
 				vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.treesitter.foldexpr()", { scope = "local", win = 0 })
+				vim.api.nvim_set_option_value("indentexpr", "v:lua.require'nvim-treesitter'.indentexpr()", { buf = buf })
 			end,
 		})
 	end,
