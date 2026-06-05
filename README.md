@@ -36,6 +36,7 @@ To add a new plugin, create a new file in `lua/plugins/plugin_name.lua` returnin
 ## Keymaps
 
 - `<leader>` is set to ` ` (Space).
+- `<leader>b`: Toggle Dark/Light theme (Dragon/Lotus).
 - `<C-e>`: Open file explorer (mini.files).
 - `<leader>ff`: Find files.
 - `<leader>fg`: Live grep.
