@@ -40,18 +40,16 @@ return {
 					return
 				end
 
-				-- Auto-install missing parsers
 				if not ts.is_installed(lang) then
 					ts.install(lang)
 				end
 
 				pcall(vim.treesitter.start, buf, lang)
 
-				local wo = vim.wo[0][0]
-				wo.foldmethod = "expr"
-				wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-				vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				-- Use buffer-local settings safely
+				vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local", win = 0 })
+				vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.treesitter.foldexpr()", { scope = "local", win = 0 })
+				vim.api.nvim_set_option_value("indentexpr", "v:lua.require'nvim-treesitter'.indentexpr()", { buf = buf })
 			end,
 		})
 	end,
