@@ -1,3 +1,11 @@
+---@class TSConfig
+---@field ensure_installed string[]
+---@field auto_install boolean
+---@field sync_install boolean
+---@field highlight {enable: boolean, additional_vim_regex_highlighting: boolean}
+---@field indent {enable: boolean}
+---@field incremental_selection {enable: boolean, keymaps: table<string, string|boolean>}
+
 ---@type LazySpec
 return {
 	"nvim-treesitter/nvim-treesitter",
@@ -16,6 +24,7 @@ return {
 			"markdown_inline",
 			"bash",
 			"python",
+			"java",
 			"javascript",
 			"typescript",
 			"tsx",
