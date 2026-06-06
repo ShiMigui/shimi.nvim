@@ -1,3 +1,5 @@
+local keymaps = require("config.keymaps").keymaps
+
 return {
 	"nvim-telescope/telescope.nvim",
 	version = "*",
@@ -22,30 +24,28 @@ return {
 	config = function(_, opts)
 		require("telescope").setup(opts)
 		require("telescope").load_extension("fzf")
-
 		local b = require("telescope.builtin")
-		local map = vim.keymap.set
 
-		map("n", "<leader>fh", b.help_tags, { desc = "Find Help" })
-		map("n", "<leader>ff", b.find_files, { desc = "Find Files" })
-		map("n", "<leader>fr", b.oldfiles, { desc = "Recent Files" })
-		map("n", "<leader>fg", b.live_grep, { desc = "Find Grep" })
-		map("n", "<leader>fs", b.current_buffer_fuzzy_find, { desc = "Find in Buffer" })
-		map("n", "<leader>fn", function()
-			b.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Neovim Config" })
-		end, { desc = "Find Config Files" })
+		keymaps["Find Help"] = { leader = "fh", rhs = b.help_tags }
+		keymaps["Find Files"] = { leader = "ff", rhs = b.find_files }
+		keymaps["Recent Files"] = { leader = "fr", rhs = b.oldfiles }
+		keymaps["Find Grep"] = { leader = "fg", rhs = b.live_grep }
+		keymaps["Find in Buffer"] = { leader = "f", rhs = b.current_buffer_fuzzy_find }
+		keymaps["List Diagnostics"] = { leader = "dl", rhs = b.diagnostics }
+		keymaps["Type Definition"] = { leader = "gt", rhs = b.lsp_type_definitions }
+		keymaps["Document Symbols"] = { leader = "ds", rhs = b.lsp_document_symbols }
+		keymaps["Workspace Symbols"] = { leader = "ws", rhs = b.lsp_workspace_symbols }
 
-		map("n", "gd", b.lsp_definitions, { desc = "Go to Definition" })
-		map("n", "gr", b.lsp_references, { desc = "Go to References" })
-		map("n", "gi", b.lsp_implementations, { desc = "Go to Implementation" })
-		map("n", "<leader>dl", b.diagnostics, { desc = "List Diagnostics" })
-		map("n", "<leader>gt", b.lsp_type_definitions, { desc = "Type Definition" })
-		map("n", "<leader>ds", b.lsp_document_symbols, { desc = "Document Symbols" })
-		map("n", "<leader>ws", b.lsp_workspace_symbols, { desc = "Workspace Symbols" })
+		keymaps["Git Status"] = { leader = "gs", rhs = b.git_status }
+		keymaps["Git Commits"] = { leader = "gc", rhs = b.git_commits }
+		keymaps["Git Buffer Commits"] = { leader = "gb", rhs = b.git_bcommits }
+		keymaps["Git Branches"] = { leader = "gB", rhs = b.git_branches }
 
-		map("n", "<leader>gs", b.git_status, { desc = "Git Status" })
-		map("n", "<leader>gc", b.git_commits, { desc = "Git Commits" })
-		map("n", "<leader>gb", b.git_bcommits, { desc = "Git Buffer Commits" })
-		map("n", "<leader>gB", b.git_branches, { desc = "Git Branches" })
+		keymaps["Find Config Files"] = {
+			leader = "fn",
+			rhs = function()
+				b.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Neovim Config" })
+			end,
+		}
 	end,
 }

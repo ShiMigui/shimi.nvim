@@ -10,7 +10,6 @@ return {
 	"sqlls",
 	"dockerfile-language-server",
 	"marksman",
-	"jdtls",
 	["yaml-language-server"] = {
 		settings = {
 			yaml = {

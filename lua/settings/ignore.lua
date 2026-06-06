@@ -1,1 +1,5 @@
-return { ".git/", "vendor/", "node_modules/" }
+return {
+	".git/",
+	"vendor/",
+	"node_modules/",
+}

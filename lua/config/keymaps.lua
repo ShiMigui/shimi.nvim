@@ -1,43 +1,120 @@
-local map = vim.keymap.set
+--- @alias shimi.VimMode "n" | "v" | "x" | "s" | "o" | "!" | "i" | "l" | "c" | "t"
 
--- General
-map("i", "jk", "<esc>", { desc = "Exit insert mode" })
-map("n", "<leader>bd", "<cmd>bd!<cr>", { desc = "Buffer quit" })
-map("n", "<leader>bD", function()
-	local api = vim.api
-	local current = api.nvim_get_current_buf()
-	for _, b in ipairs(api.nvim_list_bufs()) do
-		if b ~= current and api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted then
-			vim.cmd("bd " .. b)
-		end
+--- @class shimi.Keymap
+--- @field modes? shimi.VimMode | shimi.VimMode[] The modes for which the keymap will be active. Defaults to "n".
+--- @field lhs? string The key sequence that triggers the keymap.
+--- @field leader? string If provided, the keymap will be prefixed with <leader>.
+--- @field rhs? string | function The command or function to be executed.
+--- @field cmd? string If provided, will be wrapped in <cmd> and <cr>.
+--- @field esc? boolean If true, prepends <esc> to the RHS.
+--- @field opts? vim.keymap.set.Opts Additional options for vim.keymap.set.
+
+--- @class shimi.VimKeymap
+--- @field modes shimi.VimMode | shimi.VimMode[]
+--- @field lhs string
+--- @field rhs string | function
+--- @field opts vim.keymap.set.Opts
+
+--- @alias shimi.KeymapList table<string, shimi.Keymap>
+
+--- @type shimi.KeymapList
+local keymaps = {}
+
+--- Resolve and set a single keymap.
+--- @param desc string The description of the keymap (used for the 'desc' option).
+--- @param map shimi.Keymap The keymap definition.
+local function resolve(desc, map)
+	local lhs = map.lhs
+
+	if not lhs then
+		assert(map.leader, "Missing lhs/leader for: " .. desc)
+		lhs = "<leader>" .. map.leader
 	end
-end, { desc = "Quit all other buffers" })
 
--- LSP (these are typically set on LspAttach, but can be global if we use a helper)
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local bufnr = args.buf
-		local opts = { buffer = bufnr }
+	local rhs = map.rhs
 
-		map("n", "gf", vim.lsp.buf.format, { buffer = bufnr, desc = "Format file" })
-		map("n", "gd", vim.lsp.buf.definition, opts)
-		map("n", "gD", vim.lsp.buf.declaration, opts)
-		map("n", "gi", vim.lsp.buf.implementation, opts)
-		map("n", "gr", vim.lsp.buf.references, opts)
-		map("n", "K", vim.lsp.buf.hover, opts)
-		map({ "i", "n" }, "<C-k>", vim.lsp.buf.signature_help, opts)
-		map("n", "rn", vim.lsp.buf.rename, opts)
-		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-		map("n", "gl", vim.diagnostic.open_float, opts)
-		map("n", "]d", function()
-			vim.diagnostic.jump({ count = 1 })
-		end, opts)
-		map("n", "[d", function()
-			vim.diagnostic.jump({ count = -1 })
-		end, opts)
-		map("n", "<leader>dl", vim.diagnostic.setloclist, opts)
-		map("n", "<leader>th", function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		end, { buffer = bufnr, desc = "Toggle inlay hints" })
+	if not rhs then
+		assert(map.cmd, "Missing rhs/cmd for: " .. desc)
+		local esc_prefix = map.esc and "<esc>" or ""
+		rhs = esc_prefix .. "<cmd>" .. map.cmd .. "<cr>"
+	end
+
+	local opts = vim.tbl_deep_extend("force", { desc = desc }, map.opts or {})
+
+	vim.keymap.set(map.modes or "n", lhs, rhs, opts)
+end
+
+-- Core Mappings
+keymaps["Exit insert mode"] = { lhs = "jk", rhs = "<esc>", modes = "i" }
+keymaps["Buffer quit"] = { leader = "bd", cmd = "bd!" }
+keymaps["Quit all other buffers"] = {
+	leader = "bD",
+	rhs = function()
+		local api = vim.api
+		local current = api.nvim_get_current_buf()
+		for _, b in ipairs(api.nvim_list_bufs()) do
+			if b ~= current and api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted then
+				vim.cmd("bd " .. b)
+			end
+		end
 	end,
-})
+}
+
+-- Mini Mappings
+keymaps["Open Mini Files"] = {
+	lhs = "<C-e>",
+	modes = { "n", "i" },
+	rhs = function()
+		require("mini.files").open()
+	end,
+}
+
+-- Parrot Mappings
+keymaps["New Chat"] = { leader = "an", cmd = "PrtChatNew" }
+keymaps["Rewrite"] = { leader = "ar", rhs = ":PrtRewrite ", modes = "v" }
+keymaps["Append"] = { leader = "aa", rhs = ":PrtAppend ", modes = { "n", "v" } }
+keymaps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend ", modes = { "n", "v" } }
+keymaps["Implement"] = { leader = "ai", rhs = ":PrtImplement ", modes = { "n", "v" } }
+keymaps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk ", modes = { "n", "v" } }
+keymaps["Retry"] = { leader = "at", cmd = "PrtRetry" }
+
+-- LSP Mappings
+keymaps["Format file"] = { lhs = "gf", rhs = vim.lsp.buf.format }
+keymaps["Go to definition"] = { lhs = "gd", rhs = vim.lsp.buf.definition }
+keymaps["Go to declaration"] = { lhs = "gD", rhs = vim.lsp.buf.declaration }
+keymaps["Go to implementation"] = { lhs = "gi", rhs = vim.lsp.buf.implementation }
+keymaps["Go to references"] = { lhs = "gr", rhs = vim.lsp.buf.references }
+keymaps["Hover"] = { lhs = "K", rhs = vim.lsp.buf.hover }
+keymaps["Signature help"] = { lhs = "<C-k>", modes = { "i", "n" }, rhs = vim.lsp.buf.signature_help }
+keymaps["Rename symbol"] = { lhs = "rn", rhs = vim.lsp.buf.rename }
+keymaps["Code action"] = { leader = "ca", modes = { "n", "v" }, rhs = vim.lsp.buf.code_action }
+keymaps["Open diagnostics float"] = { lhs = "gl", rhs = vim.diagnostic.open_float }
+keymaps["List diagnostics"] = { leader = "dl", rhs = vim.diagnostic.setloclist }
+keymaps["Next diagnostic"] = {
+	lhs = "]d",
+	rhs = function()
+		vim.diagnostic.jump({ count = 1 })
+	end,
+}
+keymaps["Prev diagnostic"] = {
+	lhs = "[d",
+	rhs = function()
+		vim.diagnostic.jump({ count = -1 })
+	end,
+}
+keymaps["Toggle inlay hints"] = {
+	leader = "th",
+	rhs = function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+	end,
+}
+
+return {
+	keymaps = keymaps,
+	--- Resolve all registered global keymaps.
+	resolve_all = function()
+		for dsc, kmp in pairs(keymaps) do
+			resolve(dsc, kmp)
+		end
+	end,
+}

@@ -37,3 +37,8 @@ opt.hidden = true
 opt.backspace = { "indent", "eol", "start" }
 
 opt.wildmode = "longest:full,full"
+
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99

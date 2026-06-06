@@ -19,18 +19,5 @@ return {
 	config = function(_, opts)
 		require("blink.cmp").setup(opts)
 		require("luasnip.loaders.from_vscode").lazy_load()
-
-		local ls = require("luasnip")
-		vim.keymap.set({ "i", "s" }, "<C-l>", function()
-			if ls.expand_or_jumpable() then
-				ls.expand_or_jump()
-			end
-		end, { desc = "Snippet expand/jump" })
-
-		vim.keymap.set({ "i", "s" }, "<C-h>", function()
-			if ls.jumpable(-1) then
-				ls.jump(-1)
-			end
-		end, { desc = "Snippet backward" })
 	end,
 }

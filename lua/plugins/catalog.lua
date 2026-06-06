@@ -7,7 +7,8 @@ return {
 	opts = {
 		conform = true,
 		lsp = require("settings.lsps"),
-		capability_provider = "blink.cmp",
+		lsp_config = require("settings.lsp_config"),
+		ensure_installed = require("settings.ensure_installed"),
 	},
 	config = function(_, opts)
 		local r = require("mason-registry")

@@ -2,7 +2,7 @@ return {
 	"rebelot/kanagawa.nvim",
 	priority = 1000,
 	opts = {
-		theme = "dragon", -- default theme
+		theme = "dragon",
 		compile = true,
 		undercurl = true,
 		transparent = true,
@@ -38,16 +38,5 @@ return {
 	config = function(_, opts)
 		require("kanagawa").setup(opts)
 		vim.cmd("colorscheme kanagawa")
-
-		-- Toggle between Dragon (Dark) and Lotus (Light)
-		vim.keymap.set("n", "<leader>b", function()
-			if vim.o.background == "dark" then
-				vim.o.background = "light"
-				vim.cmd("colorscheme kanagawa-lotus")
-			else
-				vim.o.background = "dark"
-				vim.cmd("colorscheme kanagawa-dragon")
-			end
-		end, { desc = "Toggle Dark/Light theme" })
 	end,
 }

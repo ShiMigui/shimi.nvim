@@ -50,14 +50,5 @@ return {
 	},
 	config = function(_, opts)
 		require("parrot").setup(opts)
-		local map = vim.keymap.set
-
-		map("n", "<leader>an", "<cmd>PrtChatNew<cr>", { desc = "New Chat" })
-		map("v", "<leader>ar", ":PrtRewrite ", { desc = "Rewrite" })
-		map({ "n", "v" }, "<leader>aa", ":PrtAppend ", { desc = "Append" })
-		map({ "n", "v" }, "<leader>ap", ":PrtPrepend ", { desc = "Prepend" })
-		map({ "n", "v" }, "<leader>ai", ":PrtImplement ", { desc = "Implement" })
-		map({ "n", "v" }, "<leader>aq", ":PrtAsk ", { desc = "Ask AI" })
-		map("n", "<leader>at", "<cmd>PrtRetry<cr>", { desc = "Retry" })
 	end,
 }

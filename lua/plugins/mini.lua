@@ -22,12 +22,9 @@ return {
 						name = name .. "/"
 					end
 					return not ignore[name]
+				end
+				},
+				})
 				end,
-			},
-		})
+				}
 
-		vim.keymap.set({ "n", "i" }, "<C-e>", function()
-			require("mini.files").open()
-		end, { desc = "Open Mini Files" })
-	end,
-}
