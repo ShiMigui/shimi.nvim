@@ -1,20 +1,20 @@
 # Shimi's Neovim
 
-Cansado de configurar Neovim do zero? Ou de lidar com distribuições pesadas que fazem tudo menos o que você precisa?
+Tired of configuring Neovim from scratch? Or dealing with heavy distributions that do everything but what you actually need?
 
-Essa é minha config pessoal — simples, bonita e direta ao ponto. Feita pra quem quer um editor que funciona desde o primeiro `nvim`, sem firulas, sem enrolação.
+This is my personal config — simple, good-looking, and straight to the point. Made for anyone who wants an editor that works from the first `nvim`, no fluff, no hassle.
 
-## ✨ O que você ganha
+## ✨ What you get
 
-- **Auto-complete inteligente** — blink.cmp te sugere enquanto digita, sem延迟
-- **LSP pronto pra usar** — abre qualquer projeto e já vem com autocomplete, diagnóstico, formatação e navegação de código
-- **Interface limpa** — tema Kanagawa Dragon, minimalista e agradável
-- **Atalhos organizados** — tudo num lugar só, sem overlap, sem surpresa
-- **Plugins essenciais** — explorador de arquivos, fuzzy finder, snippets, git, movimento avançado por árvore sintática, e mais
+- **Smart autocomplete** — blink.cmp suggests as you type, fast and accurate
+- **LSP ready out of the box** — open any project and get autocomplete, diagnostics, formatting, and code navigation
+- **Clean interface** — Kanagawa Dragon theme, minimal and pleasant
+- **Organized keymaps** — everything in one place, no overlaps, no surprises
+- **Essential plugins only** — file explorer, fuzzy finder, snippets, git, advanced tree-sitter text objects, and more
 
-Nada de dezenas de plugins que você nunca usou. Só o que realmente faz diferença no dia a dia.
+No dozens of plugins you'll never use. Just what actually matters in your daily workflow.
 
-## 🚀 Instalação
+## 🚀 Installation
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
@@ -22,32 +22,32 @@ git clone https://github.com/shimigui/nvim ~/.config/nvim
 nvim
 ```
 
-Pronto. O Lazy.nvim instala tudo automaticamente na primeira inicialização.
+That's it. Lazy.nvim installs everything automatically on first launch.
 
-Só precisa de **Neovim 0.10+**, **Git** e um compilador C. O resto é opcional.
+All you need is **Neovim 0.10+**, **Git**, and a C compiler. Everything else is optional.
 
-## 🎯 Pra quem é?
+## 🎯 Who is this for?
 
-Pra quem:
-- Já usou LazyVim ou AstroVim e quer algo mais enxuto
-- Nunca usou Neovim mas quer começar com uma base sólida
-- Sabe o que é LSP mas não quer perder tempo configurando cada um
+For anyone who:
 
-## ⚡ Atalhos principais
+- Has used LazyVim or AstroVim and wants something leaner
+- Is new to Neovim and wants a solid starting point
+- Knows what LSP is but doesn't want to configure each one manually
 
-| Tecla | O que faz |
+## ⚡ Main keymaps
+
+| Key | Action |
 |---|---|
-| `<leader>ff` | Buscar arquivos |
-| `<leader>fg` | Buscar texto nos arquivos |
-| `<C-e>` | Explorador de arquivos |
-| `jk` | Sair do modo inserção |
-| `gd` | Ir para definição |
-| `K` | Documentação do símbolo |
-| `<leader>ca` | Ações de código (LSP) |
+| `<leader>ff` | Find files |
+| `<leader>fg` | Search text in files |
+| `<C-e>` | File explorer |
+| `jk` | Exit insert mode |
+| `gd` | Go to definition |
+| `K` | Symbol documentation |
+| `<leader>ca` | LSP code actions |
 
-
-O leader é `\`. Testa que você se acostuma rápido.
+Leader key is `\`. Give it a try — you'll get used to it fast.
 
 ---
 
-Feito com o objetivo de ser simples, bonito e produtivo. Por [Shimi](https://github.com/shimigui).
+Built to be simple, beautiful, and productive. By [Shimi](https://github.com/shimigui).
