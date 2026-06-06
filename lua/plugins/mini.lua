@@ -22,9 +22,8 @@ return {
 						name = name .. "/"
 					end
 					return not ignore[name]
-				end
-				},
-				})
 				end,
-				}
-
+			},
+		})
+	end,
+}
