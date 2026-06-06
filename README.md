@@ -1,76 +1,56 @@
-# Shimi Neovim Configuration
+# Shimi's Neovim
 
-A modern, modular, and highly optimized Neovim configuration built for performance, type-safety, and developer experience.
+Cansado de configurar Neovim do zero? Ou de lidar com distribuições pesadas que fazem tudo menos o que você precisa?
 
-## 🚀 Getting Started
+Essa é minha config pessoal — simples, bonita e direta ao ponto. Feita pra quem quer um editor que funciona desde o primeiro `nvim`, sem firulas, sem enrolação.
 
-### Prerequisites
+## ✨ O que você ganha
 
-- **Neovim 0.10+** (some features require nightly or 0.12+)
-- **Git**
-- **A C Compiler** (for Tree-sitter parsers)
-- **Ollama** (optional, for local AI features)
-- **Nerd Font** (optional, for icons)
+- **Auto-complete inteligente** — blink.cmp te sugere enquanto digita, sem延迟
+- **LSP pronto pra usar** — abre qualquer projeto e já vem com autocomplete, diagnóstico, formatação e navegação de código
+- **IA local** — integração com Ollama pra implementar, refatorar e responder perguntas sem sair do editor
+- **Interface limpa** — tema Kanagawa Dragon, minimalista e agradável
+- **Atalhos organizados** — tudo num lugar só, sem overlap, sem surpresa
+- **Plugins essenciais** — explorador de arquivos, fuzzy finder, snippets, git, movimento avançado por árvore sintática, e mais
 
-### Installation
+Nada de dezenas de plugins que você nunca usou. Só o que realmente faz diferença no dia a dia.
 
-1. Backup your existing configuration:
-   ```bash
-   mv ~/.config/nvim ~/.config/nvim.bak
-   ```
+## 🚀 Instalação
 
-2. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/nvim-config.git ~/.config/nvim
-   ```
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+git clone https://github.com/shimigui/nvim ~/.config/nvim
+nvim
+```
 
-3. Open Neovim:
-   ```bash
-   nvim
-   ```
-   `lazy.nvim` will automatically install all plugins on the first run.
+Pronto. O Lazy.nvim instala tudo automaticamente na primeira inicialização.
 
-## 🏛️ Core Concepts
+Só precisa de **Neovim 0.10+**, **Git** e um compilador C. O resto é opcional.
 
-### Modular Structure
-This configuration is organized into logical modules to ensure maintainability:
-- `lua/config/`: Orchestration and core logic (Options, Keymaps, Autocmds).
-- `lua/settings/`: Data-driven configurations for LSPs, formatters, and ignore patterns.
-- `lua/plugins/`: Atomic plugin definitions. Each plugin has its own file for easier management.
+## 🎯 Pra quem é?
 
-### Centralized & Typed Keymapping
-We use a custom, typed keymapping system defined in `lua/config/keymaps.lua`. All keybindings (global, plugin-specific, and LSP-local) are registered in a central registry using the `shimi.Keymap` class. This provides:
-- **Type Safety**: EmmyLua annotations ensure keymaps are correctly defined.
-- **Discoverability**: One single source of truth for all shortcuts.
-- **Consistency**: Unified logic for leader-based and raw mappings.
+Pra quem:
+- Já usou LazyVim ou AstroVim e quer algo mais enxuto
+- Nunca usou Neovim mas quer começar com uma base sólida
+- Sabe o que é LSP mas não quer perder tempo configurando cada um
+- Quer IA no editor sem depender de serviços externos
 
-### Modern Tree-sitter Integration
-Utilizing the `main` branch of `nvim-treesitter` for the most advanced features:
-- **Auto-Installation**: Parsers are automatically installed on-the-fly when opening a new file type.
-- **Core Integration**: Leverages Neovim's native Tree-sitter APIs for highlighting, folding, and indentation.
-- **Robustness**: Advanced buffer validation prevents Treesitter from interfering with non-file buffers.
+## ⚡ Atalhos principais
 
-## ✨ Key Features
+| Tecla | O que faz |
+|---|---|
+| `<leader>ff` | Buscar arquivos |
+| `<leader>fg` | Buscar texto nos arquivos |
+| `<C-e>` | Explorador de arquivos |
+| `jk` | Sair do modo inserção |
+| `gd` | Ir para definição |
+| `K` | Documentação do símbolo |
+| `<leader>ca` | Ações de código (LSP) |
+| `<leader>an` | Nova conversa com IA |
+| `<leader>ai` | Implementar seleção com IA |
 
-- **AI Integration**: [parrot.nvim](https://github.com/frankroeder/parrot.nvim) pre-configured with local Ollama support for code implementation, refactoring, and chatting.
-- **Superior LSP Experience**: Automated LSP and tool management via [catalog.nvim](https://github.com/ShiMigui/catalog.nvim).
-- **Ultra-fast Completion**: [blink.cmp](https://github.com/Saghen/blink.cmp) provides a high-performance completion engine.
-- **Minimalist & Elegant UI**: Built on [Kanagawa](https://github.com/rebelot/kanagawa.nvim) (Dragon theme) with custom highlights for markdown and floating windows.
-- **Productivity Utils**: Full suite of [mini.nvim](https://github.com/echasnovski/mini.nvim) modules (Files, Move, Pairs, etc.) for a cohesive experience.
-
-## ⌨️ Principal Keymaps
-
-| Key | Description |
-|-----|-------------|
-| `<leader>ff` | Find Files (Telescope) |
-| `<leader>fg` | Live Grep (Telescope) |
-| `<C-e>` | File Explorer (mini.files) |
-| `jk` | Exit Insert Mode |
-| `gd` | Go to Definition |
-| `K` | LSP Hover Information |
-| `<leader>ca` | LSP Code Actions |
-| `<leader>an` | AI: New Chat (Parrot) |
-| `<leader>ai` | AI: Implement Selection (Parrot) |
+O leader é `\`. Testa que você se acostuma rápido.
 
 ---
-*Maintained with ❤️ by Shimi.*
+
+Feito com o objetivo de ser simples, bonito e produtivo. Por [Shimi](https://github.com/shimigui).
