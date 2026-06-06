@@ -69,15 +69,6 @@ keymaps["Open Mini Files"] = {
 	end,
 }
 
--- Parrot Mappings
-keymaps["New Chat"] = { leader = "an", cmd = "PrtChatNew" }
-keymaps["Rewrite"] = { leader = "ar", rhs = ":PrtRewrite ", modes = "v" }
-keymaps["Append"] = { leader = "aa", rhs = ":PrtAppend ", modes = { "n", "v" } }
-keymaps["Prepend"] = { leader = "ap", rhs = ":PrtPrepend ", modes = { "n", "v" } }
-keymaps["Implement"] = { leader = "ai", rhs = ":PrtImplement ", modes = { "n", "v" } }
-keymaps["Ask AI"] = { leader = "aq", rhs = ":PrtAsk ", modes = { "n", "v" } }
-keymaps["Retry"] = { leader = "at", cmd = "PrtRetry" }
-
 -- LSP Mappings
 keymaps["Format file"] = { lhs = "gf", rhs = vim.lsp.buf.format }
 keymaps["Go to definition"] = { lhs = "gd", rhs = vim.lsp.buf.definition }
