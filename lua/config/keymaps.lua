@@ -60,12 +60,19 @@ keymaps["Quit all other buffers"] = {
 	end,
 }
 
--- Mini Mappings
 keymaps["Open Mini Files"] = {
 	lhs = "<C-e>",
 	modes = { "n", "i" },
 	rhs = function()
 		require("mini.files").open()
+	end,
+}
+
+keymaps["Open Mini Files Here"] = {
+	lhs = "<C-S-e>",
+	modes = { "n", "i" },
+	rhs = function()
+		require("mini.files").open(vim.fn.expand("%:p:h"))
 	end,
 }
 

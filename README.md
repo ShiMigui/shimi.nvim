@@ -14,6 +14,58 @@ This is my personal config — simple, good-looking, and straight to the point. 
 
 No dozens of plugins you'll never use. Just what actually matters in your daily workflow.
 
+## ✅ Requirements
+
+| Dependency | Required | Notes |
+|---|---|---|
+| Neovim ≥ 0.10 | yes | |
+| git | yes | |
+| C compiler (gcc/clang) | yes | for treesitter parsers |
+| curl, wget, unzip, tar, gzip | yes | for Mason package manager |
+| **Language runtimes** | | |
+| Node.js + npm | recommended | for JS/TS LSPs, prettierd |
+| Java JDK 17+ | recommended | for JDTLS (Java LSP) |
+| Go | recommended | for Go LSP |
+| Rust + cargo | recommended | for Rust LSP |
+| Python 3 | recommended | for Python LSP |
+| LuaRocks | recommended | for Lua LSP |
+| **Search tools** | | |
+| ripgrep (rg) | recommended | for Telescope live grep |
+| fd | recommended | for Telescope file search |
+
+### Install dependencies
+
+<details>
+<summary>Arch Linux</summary>
+
+```bash
+sudo pacman -S --needed base-devel git curl wget unzip tar gzip ripgrep fd
+# Optional language runtimes
+sudo pacman -S --needed nodejs npm jdk21-openjdk go rust python python-pip luarocks
+```
+</details>
+
+<details>
+<summary>Ubuntu / Debian</summary>
+
+```bash
+sudo apt update
+sudo apt install build-essential git curl wget unzip tar gzip ripgrep fd-find
+# Optional language runtimes
+sudo apt install nodejs npm default-jdk golang-go rustc cargo python3 python3-pip luarocks
+```
+</details>
+
+<details>
+<summary>macOS (Homebrew)</summary>
+
+```bash
+brew install git curl wget unzip ripgrep fd
+# Optional language runtimes
+brew install node jdk go rust python luarocks
+```
+</details>
+
 ## 🚀 Installation
 
 ```bash
@@ -22,9 +74,7 @@ git clone https://github.com/shimigui/nvim ~/.config/nvim
 nvim
 ```
 
-That's it. Lazy.nvim installs everything automatically on first launch.
-
-All you need is **Neovim 0.10+**, **Git**, and a C compiler. Everything else is optional.
+Lazy.nvim installs all plugins automatically on first launch.
 
 ## 🎯 Who is this for?
 

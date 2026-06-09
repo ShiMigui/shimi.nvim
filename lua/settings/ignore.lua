@@ -3,7 +3,8 @@ return {
 	"vendor/",
 	"node_modules/",
 	"bin/",
-	".gradle/",
-	".settings/",
+	"\\.gradle/",
+	"\\.settings/",
 	"gradle/",
+	"dist/",
 }
