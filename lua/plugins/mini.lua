@@ -1,7 +1,11 @@
 return {
 	"nvim-mini/mini.nvim",
 	version = false,
+	event = "VeryLazy",
 	config = function()
+		local set = require("config.keymaps").set
+		local explorer = require("config.explorer")
+
 		require("mini.move").setup()
 		require("mini.pairs").setup()
 		require("mini.basics").setup()
@@ -23,6 +27,20 @@ return {
 					return ignore[name] == nil
 				end,
 			},
+		})
+
+		set("Toggle Mini Files", {
+			lhs = "<C-e>",
+			modes = { "n", "i" },
+			rhs = explorer.toggle,
+		})
+
+		set("Toggle Mini Files (focus file)", {
+			lhs = "<C-S-e>",
+			modes = { "n", "i" },
+			rhs = function()
+				explorer.toggle(vim.api.nvim_buf_get_name(0))
+			end,
 		})
 	end,
 }

@@ -1,8 +1,9 @@
-local keymaps = require("config.keymaps")
----@type LazySpec
+local keymaps = require("config.keymaps").set
+
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main",
+	event = "VeryLazy",
 	config = function()
 		local ts = require("nvim-treesitter")
 
@@ -51,7 +52,7 @@ return {
 			end,
 		})
 
-		keymaps["Treesitter node"] = {
+		keymaps("Treesitter node", {
 			leader = "tn",
 			rhs = function()
 				local node = vim.treesitter.get_node()
@@ -62,8 +63,8 @@ return {
 
 				print(node:type())
 			end,
-		}
-		keymaps["Treesitter inspect tree"] = {
+		})
+		keymaps("Treesitter inspect tree", {
 			leader = "ti",
 			rhs = function()
 				local parser = vim.treesitter.get_parser()
@@ -71,6 +72,6 @@ return {
 
 				print(tree:root():sexpr())
 			end,
-		}
+		})
 	end,
 }
