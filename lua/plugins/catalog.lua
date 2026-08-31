@@ -12,7 +12,26 @@ return {
 	---@type catalog.opts
 	opts = {
 		silent = true,
-		auto_install = true,
+		auto_install = {
+			lsp = true,
+			formatter = true,
+			linter = true,
+			callback = function(ft, _, formatters, _)
+				if not formatters or #formatters == 0 then
+					return
+				end
+				local names = {}
+				for _, pkg in ipairs(formatters) do
+					names[pkg.name] = true
+				end
+				local fbf = require("conform").formatters_by_ft
+				for _, name in ipairs(vim.deepcopy(fbf[ft] or {})) do
+					names[name] = true
+				end
+				fbf[ft] = vim.tbl_keys(names)
+				table.sort(fbf[ft])
+			end,
+		},
 		ensure_installed = ensure_installed,
 		lsp = {
 			default = { capabilities = require("blink.cmp").get_lsp_capabilities({}, true) },
