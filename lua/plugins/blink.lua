@@ -2,6 +2,7 @@ return {
 	"saghen/blink.cmp",
 	dependencies = { "L3MON4D3/LuaSnip", "rafamadriz/friendly-snippets" },
 	version = "1.*",
+	event = "InsertEnter",
 	build = "cargo build --release",
 	opts = {
 		fuzzy = { implementation = "prefer_rust", sorts = { "score", "sort_text", "label" } },
