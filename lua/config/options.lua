@@ -14,7 +14,7 @@ opt.smartcase = true
 
 opt.termguicolors = true
 opt.signcolumn = "yes"
-opt.wrap = false
+opt.wrap = true
 
 opt.splitright = true
 opt.splitbelow = true
@@ -40,5 +40,5 @@ opt.wildmode = "longest:full,full"
 
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
+opt.foldlevel = 99
+opt.foldlevelstart = 99

@@ -7,9 +7,8 @@ return {
 		require("mini.basics").setup()
 		require("mini.comment").setup()
 
-		local ignore_list = require("settings.ignore")
 		local ignore = {}
-		for _, v in ipairs(ignore_list) do
+		for _, v in ipairs(require("settings.ignore")) do
 			ignore[v] = true
 		end
 
@@ -21,7 +20,7 @@ return {
 					if e.fs_type == "directory" then
 						name = name .. "/"
 					end
-					return not ignore[name]
+					return ignore[name] == nil
 				end,
 			},
 		})
