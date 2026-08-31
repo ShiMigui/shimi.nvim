@@ -9,13 +9,17 @@ api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Diagnostic hover
+vim.diagnostic.config({
+	float = {
+		border = "rounded",
+		source = true,
+		focusable = true,
+		style = "minimal",
+	},
+})
+
 api.nvim_create_autocmd("CursorHold", {
 	callback = function()
-		vim.diagnostic.open_float({
-			border = "rounded",
-			source = true,
-			focusable = true,
-			style = "minimal",
-		})
+		vim.diagnostic.open_float()
 	end,
 })
