@@ -1,1 +1,0 @@
-return { capabilities = "blink.cmp" }
