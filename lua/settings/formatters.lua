@@ -1,0 +1,15 @@
+return {
+	lua = { "stylua" },
+	java = { "google-java-format" },
+	javascriptreact = { "prettierd" },
+	typescriptreact = { "prettierd" },
+	javascript = { "prettierd" },
+	typescript = { "prettierd" },
+	markdown = { "markdownlint" },
+	html = { "prettierd" },
+	scss = { "prettierd" },
+	json = { "prettierd" },
+	yaml = { "prettierd" },
+	css = { "prettierd" },
+	php = { "php-cs-fixer" },
+}

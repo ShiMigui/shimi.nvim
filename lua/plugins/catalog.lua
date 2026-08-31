@@ -1,15 +1,10 @@
-local ensure_installed = require("plugins.conform").opts.formatters_by_ft or nil
-
-if ensure_installed then
-	local map = {}
-	for _, v in pairs(ensure_installed) do
-		for _, nm in pairs(v) do
-			map[nm] = true
-		end
+local ensure_installed = {}
+for _, formatters in pairs(require("settings.formatters")) do
+	for _, name in ipairs(formatters) do
+		ensure_installed[name] = true
 	end
-
-	ensure_installed = vim.tbl_keys(map)
 end
+ensure_installed = vim.tbl_keys(ensure_installed)
 
 return {
 	"ShiMigui/catalog.nvim",
