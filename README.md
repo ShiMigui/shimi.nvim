@@ -1,103 +1,70 @@
 # Shimi's Neovim
 
-Tired of configuring Neovim from scratch? Or dealing with heavy distributions that do everything but what you actually need?
+A personal, dependency-light Neovim config that stays out of your way. Tools,
+LSP servers, formatters and linters install themselves — the config keeps
+learning as you open different filetypes.
 
-This is my personal config — simple, good-looking, and straight to the point. Made for anyone who wants an editor that works from the first `nvim`, no fluff, no hassle.
+## Features
 
-## ✨ What you get
+- **Self-managing tooling** — [catalog.nvim](https://github.com/ShiMigui/catalog.nvim)
+  auto-installs LSP servers, formatters and linters per filetype via Mason. No
+  manual setup for new languages.
+- **Smart completion** — blink.cmp with LuaSnip + friendly-snippets.
+- **Formatting on save** — conform.nvim writes every formatter it auto-installs
+  back to `lua/settings/formatters.lua`, so your repo doubles as the config.
+- **File explorer** — [mini.files](https://github.com/nvim-mini/mini.nvim) (`<C-e>`).
+- **Fuzzy finding** — Telescope with fzf-native (files, grep, git, symbols).
+- **Clean theme** — Kanagawa (wave) with a dark background.
+- **Treesitter** — parser auto-install + text-objects on first open.
 
-- **Smart autocomplete** — blink.cmp suggests as you type, fast and accurate
-- **LSP ready out of the box** — open any project and get autocomplete, diagnostics, formatting, and code navigation
-- **Clean interface** — Kanagawa Dragon theme, minimal and pleasant
-- **Organized keymaps** — everything in one place, no overlaps, no surprises
-- **Essential plugins only** — file explorer, fuzzy finder, snippets, git, advanced tree-sitter text objects, and more
+## What's included
 
-No dozens of plugins you'll never use. Just what actually matters in your daily workflow.
+| Plugin | Purpose |
+| --- | --- |
+| [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager (bootstrapped) |
+| [catalog.nvim](https://github.com/ShiMigui/catalog.nvim) | Auto-install LSP + formatters + linters |
+| [blink.cmp](https://github.com/saghen/blink.cmp) | Autocomplete |
+| [LuaSnip](https://github.com/L3MON4D3/LuaSnip) / friendly-snippets | Snippets |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Parsers, folding, text objects |
+| [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find / grep / git / symbols |
+| [mini.nvim](https://github.com/nvim-mini/mini.nvim) | File explorer + editing utils |
+| [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Tabline |
+| [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | Colorscheme |
+| [lazydev.nvim](https://github.com/folke/lazydev.nvim) | Lua LSP for your config |
 
-## ✅ Requirements
-
-| Dependency | Required | Notes |
-|---|---|---|
-| Neovim ≥ 0.10 | yes | |
-| git | yes | |
-| C compiler (gcc/clang) | yes | for treesitter parsers |
-| curl, wget, unzip, tar, gzip | yes | for Mason package manager |
-| **Language runtimes** | | |
-| Node.js + npm | recommended | for JS/TS LSPs, prettierd |
-| Java JDK 17+ | recommended | for JDTLS (Java LSP) |
-| Go | recommended | for Go LSP |
-| Rust + cargo | recommended | for Rust LSP |
-| Python 3 | recommended | for Python LSP |
-| LuaRocks | recommended | for Lua LSP |
-| **Search tools** | | |
-| ripgrep (rg) | recommended | for Telescope live grep |
-| fd | recommended | for Telescope file search |
-
-### Install dependencies
-
-<details>
-<summary>Arch Linux</summary>
-
-```bash
-sudo pacman -S --needed base-devel git curl wget unzip tar gzip ripgrep fd
-# Optional language runtimes
-sudo pacman -S --needed nodejs npm jdk21-openjdk go rust python python-pip luarocks
-```
-</details>
-
-<details>
-<summary>Ubuntu / Debian</summary>
-
-```bash
-sudo apt update
-sudo apt install build-essential git curl wget unzip tar gzip ripgrep fd-find
-# Optional language runtimes
-sudo apt install nodejs npm default-jdk golang-go rustc cargo python3 python3-pip luarocks
-```
-</details>
-
-<details>
-<summary>macOS (Homebrew)</summary>
-
-```bash
-brew install git curl wget unzip ripgrep fd
-# Optional language runtimes
-brew install node jdk go rust python luarocks
-```
-</details>
-
-## 🚀 Installation
+## Install
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 git clone https://github.com/shimigui/nvim ~/.config/nvim
-nvim
+nvim   # lazy.nvim installs everything on first launch
 ```
 
-Lazy.nvim installs all plugins automatically on first launch.
+## Requirements
 
-## 🎯 Who is this for?
+| Dependency | Required | Notes |
+| --- | --- | --- |
+| Neovim ≥ 0.10 | yes | |
+| git | yes | plugin manager |
+| C compiler (gcc/clang) | yes | treesitter parsers + fzf-native |
+| curl, wget, unzip, tar | yes | Mason installs |
+| ripgrep (rg) | recommended | Telescope live grep |
+| fd | recommended | Telescope file search |
+| Node / JDK / Go / Rust / Python | optional | only for those languages |
 
-For anyone who:
+## Main keymaps
 
-- Has used LazyVim or AstroVim and wants something leaner
-- Is new to Neovim and wants a solid starting point
-- Knows what LSP is but doesn't want to configure each one manually
-
-## ⚡ Main keymaps
+Leader is `\`.
 
 | Key | Action |
-|---|---|
-| `<leader>ff` | Find files |
-| `<leader>fg` | Search text in files |
-| `<C-e>` | File explorer |
+| --- | --- |
 | `jk` | Exit insert mode |
+| `<C-e>` | File explorer (mini.files) |
+| `gf` | Format |
 | `gd` | Go to definition |
-| `K` | Symbol documentation |
-| `<leader>ca` | LSP code actions |
-
-Leader key is `\`. Give it a try — you'll get used to it fast.
-
----
-
-Built to be simple, beautiful, and productive. By [Shimi](https://github.com/shimigui).
+| `K` | Hover |
+| `<leader>ca` | Code action |
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>gs` | Git status |
