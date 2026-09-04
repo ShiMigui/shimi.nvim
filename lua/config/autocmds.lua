@@ -24,7 +24,6 @@ api.nvim_create_autocmd("VimEnter", {
 			return
 		end
 
-		require("lazy").load({ plugins = { "mini.nvim" } })
 		require("mini.files").open()
 	end,
 })

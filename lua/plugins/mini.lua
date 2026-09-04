@@ -1,7 +1,7 @@
 return {
 	"nvim-mini/mini.nvim",
 	version = false,
-	event = "VeryLazy",
+	lazy = false,
 	config = function()
 		local set = require("config.keymaps").set
 		local explorer = require("config.explorer")
