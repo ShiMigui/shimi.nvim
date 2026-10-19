@@ -60,6 +60,7 @@ Leader is `\`.
 | Key | Action |
 | --- | --- |
 | `jk` | Exit insert mode |
+| `<A-h/j/k/l>` | Move between windows |
 | `<C-s>` | Save file |
 | `<C-e>` | File explorer (mini.files) |
 | `gf` | Format |
