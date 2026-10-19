@@ -10,8 +10,8 @@ learning as you open different filetypes.
   auto-installs LSP servers, formatters and linters per filetype via Mason. No
   manual setup for new languages.
 - **Smart completion** — blink.cmp with LuaSnip + friendly-snippets.
-- **Formatting on save** — conform.nvim writes every formatter it auto-installs
-  back to `lua/settings/formatters.lua`, so your repo doubles as the config.
+- **Formatting** — conform.nvim (`gf`) picks up every formatter catalog.nvim
+  auto-installs, with no config files to maintain.
 - **File explorer** — [mini.files](https://github.com/nvim-mini/mini.nvim) (`<C-e>`).
 - **Fuzzy finding** — Telescope with fzf-native (files, grep, git, symbols).
 - **Clean theme** — Kanagawa (wave) with a dark background.
