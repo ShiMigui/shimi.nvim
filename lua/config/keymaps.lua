@@ -36,6 +36,7 @@ end
 -- Core Mappings
 set("Exit insert mode", { lhs = "jk", rhs = "<esc>", modes = "i" })
 set("Buffer quit", { leader = "bd", cmd = "bd!" })
+set("Save file", { lhs = "<C-s>", cmd = "w", modes = { "n", "i", "v" } })
 set("Quit all other buffers", {
 	leader = "bD",
 	rhs = function()
