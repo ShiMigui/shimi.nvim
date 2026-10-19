@@ -36,6 +36,7 @@ end
 -- Core Mappings
 set("Exit insert mode", { lhs = "jk", rhs = "<esc>", modes = "i" })
 set("Buffer quit", { leader = "bd", cmd = "bd!" })
+set("Save file", { lhs = "<C-s>", cmd = "w", modes = { "n", "i", "v" } })
 set("Quit all other buffers", {
 	leader = "bD",
 	rhs = function()
@@ -48,5 +49,11 @@ set("Quit all other buffers", {
 		end
 	end,
 })
+
+-- Window Navigation
+set("Focus window left", { lhs = "<A-h>", rhs = "<C-w>h", modes = { "n", "v" } })
+set("Focus window down", { lhs = "<A-j>", rhs = "<C-w>j", modes = { "n", "v" } })
+set("Focus window up", { lhs = "<A-k>", rhs = "<C-w>k", modes = { "n", "v" } })
+set("Focus window right", { lhs = "<A-l>", rhs = "<C-w>l", modes = { "n", "v" } })
 
 return { set = set }

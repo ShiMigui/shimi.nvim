@@ -10,12 +10,12 @@ learning as you open different filetypes.
   auto-installs LSP servers, formatters and linters per filetype via Mason. No
   manual setup for new languages.
 - **Smart completion** — blink.cmp with LuaSnip + friendly-snippets.
-- **Formatting on save** — conform.nvim writes every formatter it auto-installs
-  back to `lua/settings/formatters.lua`, so your repo doubles as the config.
+- **Formatting** — conform.nvim (`gf`) picks up every formatter catalog.nvim
+  auto-installs, with no config files to maintain.
 - **File explorer** — [mini.files](https://github.com/nvim-mini/mini.nvim) (`<C-e>`).
 - **Fuzzy finding** — Telescope with fzf-native (files, grep, git, symbols).
 - **Git hunks** — gitsigns.nvim stage/reset/blame/diff current changes (`<leader>h*`).
-- **Clean theme** — Kanagawa (wave) with a dark background.
+- **Clean theme** — onedarkpro.nvim with several variants (default: vaporwave).
 - **Treesitter** — parser auto-install + text-objects on first open.
 
 ## What's included
@@ -32,7 +32,7 @@ learning as you open different filetypes.
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks: signs, stage/reset, blame, diff |
 | [mini.nvim](https://github.com/nvim-mini/mini.nvim) | File explorer + editing utils |
 | [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Tabline |
-| [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | Colorscheme |
+| [onedarkpro.nvim](https://github.com/olimorris/onedarkpro.nvim) | Colorscheme |
 | [lazydev.nvim](https://github.com/folke/lazydev.nvim) | Lua LSP for your config |
 
 ## Install
@@ -62,6 +62,8 @@ Leader is `\`.
 | Key | Action |
 | --- | --- |
 | `jk` | Exit insert mode |
+| `<A-h/j/k/l>` | Move between windows |
+| `<C-s>` | Save file |
 | `<C-e>` | File explorer (mini.files) |
 | `gf` | Format |
 | `gd` | Go to definition |

@@ -20,10 +20,8 @@ api.nvim_create_autocmd("CursorHold", { callback = vim.diagnostic.open_float })
 
 api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-		if not vim.tbl_isempty(vim.fn.argv()) then
-			return
+		if vim.tbl_isempty(vim.fn.argv()) then
+			require("mini.files").open()
 		end
-
-		require("mini.files").open()
 	end,
 })
