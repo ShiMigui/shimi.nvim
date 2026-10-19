@@ -14,6 +14,7 @@ learning as you open different filetypes.
   back to `lua/settings/formatters.lua`, so your repo doubles as the config.
 - **File explorer** — [mini.files](https://github.com/nvim-mini/mini.nvim) (`<C-e>`).
 - **Fuzzy finding** — Telescope with fzf-native (files, grep, git, symbols).
+- **Git hunks** — gitsigns.nvim stage/reset/blame/diff current changes (`<leader>h*`).
 - **Clean theme** — Kanagawa (wave) with a dark background.
 - **Treesitter** — parser auto-install + text-objects on first open.
 
@@ -28,6 +29,7 @@ learning as you open different filetypes.
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Parsers, folding, text objects |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find / grep / git / symbols |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks: signs, stage/reset, blame, diff |
 | [mini.nvim](https://github.com/nvim-mini/mini.nvim) | File explorer + editing utils |
 | [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Tabline |
 | [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | Colorscheme |
@@ -68,3 +70,7 @@ Leader is `\`.
 | `<leader>ff` | Find files |
 | `<leader>fg` | Live grep |
 | `<leader>gs` | Git status |
+| `<leader>hs` | Stage hunk |
+| `<leader>hr` | Reset hunk |
+| `<leader>hp` | Preview hunk |
+| `<leader>hb` | Blame line |
