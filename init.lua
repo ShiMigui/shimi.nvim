@@ -10,7 +10,7 @@ _G.THEME = ({
 	VIVID = "onedark_vivid",
 	BLACK = "onedark_dark",
 	VAPORWAVE = "vaporwave",
-}).BLACK
+}).VAPORWAVE
 
 require("config.plugins")
 require("config.keymaps")
