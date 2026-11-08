@@ -39,7 +39,7 @@ learning as you open different filetypes.
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/shimigui/nvim ~/.config/nvim
+git clone https://github.com/ShiMigui/shimi.nvim ~/.config/nvim
 nvim   # lazy.nvim installs everything on first launch
 ```
 
