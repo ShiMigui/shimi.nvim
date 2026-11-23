@@ -2,9 +2,10 @@ local set = require("config.keymaps").set
 
 return {
 	"ShiMigui/catalog.nvim",
-    lazy = false,
+	event = "VeryLazy",
+	lazy = false,
 	dependencies = {
-		{ "williamboman/mason.nvim", opts = {}, lazy = false },
+		{ "williamboman/mason.nvim", opts = {} },
 		"neovim/nvim-lspconfig",
 		{
 			"stevearc/conform.nvim",

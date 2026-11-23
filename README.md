@@ -10,11 +10,12 @@ learning as you open different filetypes.
   auto-installs LSP servers, formatters and linters per filetype via Mason. No
   manual setup for new languages.
 - **Smart completion** — blink.cmp with LuaSnip + friendly-snippets.
-- **Formatting on save** — conform.nvim writes every formatter it auto-installs
-  back to `lua/settings/formatters.lua`, so your repo doubles as the config.
+- **Formatting** — conform.nvim (`gf`) picks up every formatter catalog.nvim
+  auto-installs, with no config files to maintain.
 - **File explorer** — [mini.files](https://github.com/nvim-mini/mini.nvim) (`<C-e>`).
 - **Fuzzy finding** — Telescope with fzf-native (files, grep, git, symbols).
-- **Clean theme** — Kanagawa (wave) with a dark background.
+- **Git hunks** — gitsigns.nvim stage/reset/blame/diff current changes (`<leader>h*`).
+- **Clean theme** — onedarkpro.nvim with several variants (default: vaporwave).
 - **Treesitter** — parser auto-install + text-objects on first open.
 
 ## What's included
@@ -28,16 +29,17 @@ learning as you open different filetypes.
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Parsers, folding, text objects |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find / grep / git / symbols |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks: signs, stage/reset, blame, diff |
 | [mini.nvim](https://github.com/nvim-mini/mini.nvim) | File explorer + editing utils |
 | [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) | Tabline |
-| [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | Colorscheme |
+| [onedarkpro.nvim](https://github.com/olimorris/onedarkpro.nvim) | Colorscheme |
 | [lazydev.nvim](https://github.com/folke/lazydev.nvim) | Lua LSP for your config |
 
 ## Install
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/shimigui/nvim ~/.config/nvim
+git clone https://github.com/ShiMigui/shimi.nvim ~/.config/nvim
 nvim   # lazy.nvim installs everything on first launch
 ```
 
@@ -61,6 +63,7 @@ Leader is `\`.
 | --- | --- |
 | `jk` | Exit insert mode |
 | `<A-h/j/k/l>` | Move between windows |
+| `<C-s>` | Save file |
 | `<C-e>` | File explorer (mini.files) |
 | `gf` | Format |
 | `gd` | Go to definition |
@@ -69,3 +72,7 @@ Leader is `\`.
 | `<leader>ff` | Find files |
 | `<leader>fg` | Live grep |
 | `<leader>gs` | Git status |
+| `<leader>hs` | Stage hunk |
+| `<leader>hr` | Reset hunk |
+| `<leader>hp` | Preview hunk |
+| `<leader>hb` | Blame line |
