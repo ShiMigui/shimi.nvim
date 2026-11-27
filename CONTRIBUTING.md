@@ -52,6 +52,17 @@ a release, including for dependency updates and routine maintenance.
 - Unknown `version:*` labels, and pull requests with no version signal at all,
   fail the required check.
 
+## Releases
+
+A successful merge to `main` creates the tag and GitHub release automatically.
+
+- The next version is taken from the highest existing `vX.Y.Z` tag and the
+  effective bump of the merged pull request: `version:major` gives
+  `vX+1.0.0`, `version:minor` gives `vX.Y+1.0`, and `version:patch` gives
+  `vX.Y.Z+1`.
+- If the computed tag already exists, no duplicate tag or release is created.
+- Do not create tags or releases by hand.
+
 ## Formatting and verification
 
 - Lua is formatted with StyLua using `.stylua.toml`. Run
