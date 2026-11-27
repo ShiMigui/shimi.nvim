@@ -26,7 +26,7 @@ def run(args, check=True):
     p = subprocess.run(args, text=True, capture_output=True)
     if check and p.returncode:
         raise RuntimeError(p.stderr.strip() or p.stdout.strip())
-    return p.stdout.strip()
+    return p.stdout.strip() if p.returncode == 0 else ""
 
 
 def api(path, check=True):
